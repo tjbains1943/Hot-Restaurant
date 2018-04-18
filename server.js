@@ -5,6 +5,8 @@ var path = require('path');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
+const deleteReserve = require('./controllers/reserveController').deleteReserve;
+
 var reserve = [
   {
     tableNo: 1,
@@ -78,22 +80,4 @@ app.post('/api/new', (req, res) => {
     });
   }
 });
-app.post('/api/remove', (req, res) => {
-  var newReservation = req.body;
-  console.log(newReservation);
-
-  reserve.forEach((e) => {
-    var table = e.tableNo;
-    if (e.uniqueID == newReservation.uniqueID) {
-      reserve.pop(e);
-      var waitListed = waitList.splice(0);
-      console.log(waitListed);
-      waitListed.tableNo = table;
-      reserve.push(waitListed);
-      res.json({ status: 'removed' });
-      return;
-    } else {
-      res.json({ status: 'Reservation not found' });
-    }
-  });
-});
+app.post('/api/remove', (req, res) => deleteReserve(req, res, reserve, waitList));
