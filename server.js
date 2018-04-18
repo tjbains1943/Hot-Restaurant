@@ -31,27 +31,27 @@ app.use(
 );
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'home.html'));
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/tables', function(req, res) {
+app.get('/tables', function (req, res) {
   res.sendFile(path.join(__dirname, 'tables.html'));
 });
 
-app.get('/reserve', function(req, res) {
-  res.sendFile(path.join(__dirname, 'reserve.html'));
+app.get('/reserve', function (req, res) {
+  res.sendFile(path.join(__dirname, 'reserveTable.html'));
 });
 
-app.get('/api/tables', function(req, res) {
+app.get('/api/tables', function (req, res) {
   return res.json(reserve);
 });
 
-app.get('/api/waitList', function(req, res) {
+app.get('/api/waitList', function (req, res) {
   return res.json(waitList);
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log('App listening on PORT ' + PORT);
 });
 
